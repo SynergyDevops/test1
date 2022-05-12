@@ -7,7 +7,7 @@ terraform {
   }
 }
 provider "github" {
-  organization = "SynergyDevops"
+  organization = "github org"
   #version = "~> 4.0"
 }
 
