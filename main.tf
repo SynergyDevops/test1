@@ -13,7 +13,7 @@ provider "github" {
 
 resource "github_branch_protection_v3" "main_protection" {
   count = length(var.repository)
-  reposrepository =  var.repository[count.index]
+  repository =  var.repository[count.index]
   #repository = "${var.repository}"
   branch = "main"
   enforce_admins = true
