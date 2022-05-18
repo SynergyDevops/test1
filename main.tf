@@ -7,7 +7,7 @@ terraform {
   }
 }
 provider "github" {
-  #token        = "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"
+  token        = "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"
   organization = "SynergyDevops"
   #version = "~> 4.0"
 }
