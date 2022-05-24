@@ -25,7 +25,7 @@ resource "github_branch_protection_v3" "main_protection" {
   
   required_status_checks {
     strict   = false
-    contexts = [""]
+    contexts = ["mddeepu8"]
   }
   required_pull_request_reviews {
     dismiss_stale_reviews  = true
