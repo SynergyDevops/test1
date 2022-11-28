@@ -40,5 +40,5 @@ jobs:
     #  run: terraform apply -auto-approve -input=false
       
     - name: terraform export
-      run: terraform output -json
+      run: terraform output -json all_repositories | jq -r '.[0]'
     
