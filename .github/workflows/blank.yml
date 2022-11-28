@@ -37,5 +37,9 @@ jobs:
       run: terraform plan
       
     - name: terraform apply
-      run: terraform apply -auto-approve -input=false 
+      run: terraform apply -auto-approve -input=false
+      
+    - name: terraform export
+      run: terraform output -json >> /test1/tf.out.json
+      #run: jq '.vm_ip.value' /tmp/tf.out.json
       
