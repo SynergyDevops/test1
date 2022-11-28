@@ -19,12 +19,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.SYNERGY_DEVOPS_ACCESS_GITHUB_TOKEN }}
 
-    steps:
-    - name: warpper
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_wrapper: true
-    
+    steps:    
     
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
@@ -44,6 +39,11 @@ jobs:
       
     #- name: terraform apply
     #  run: terraform apply -auto-approve -input=false
+    
+    - name: warpper
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: true
       
     - name: terraform export
       run: terraform output -json
