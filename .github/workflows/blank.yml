@@ -37,6 +37,9 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
       
+    - name: Terraform json output
+      run: terraform show -json terraform.plan > terraform.json
+      
     #- name: terraform apply
     #  run: terraform apply -auto-approve -input=false
     
@@ -45,6 +48,6 @@ jobs:
 #       with:
 #         terraform_wrapper: true
       
-    - name: terraform export
-      run: terraform output -json
+#     - name: terraform export
+#       run: terraform output -json
     
