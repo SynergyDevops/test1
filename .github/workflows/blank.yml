@@ -43,11 +43,17 @@ jobs:
     #- name: terraform apply
     #  run: terraform apply -auto-approve -input=false
     
-#     - name: warpper
-#       uses: hashicorp/setup-terraform@v2
-#       with:
+#   - name: warpper
+#     uses: hashicorp/setup-terraform@v2
+#     with:
 #         terraform_wrapper: true
       
-#     - name: terraform export
-#       run: terraform output -json
+#   - name: terraform export
+#     run: terraform output -json
+        
+    - uses: ahmadnassri/action-terraform-report@v3
+      with:
+          # tell the action the plan outputs
+          terraform-text: ${{ github.workspace }}/terraform.text
+          terraform-json: ${{ github.workspace }}/terraform.json
     
