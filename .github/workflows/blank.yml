@@ -40,10 +40,10 @@ jobs:
     #- name: terraform apply
     #  run: terraform apply -auto-approve -input=false
     
-    - name: warpper
-      uses: hashicorp/setup-terraform@v2
-      with:
-        terraform_wrapper: true
+#     - name: warpper
+#       uses: hashicorp/setup-terraform@v2
+#       with:
+#         terraform_wrapper: true
       
     - name: terraform export
       run: terraform output -json
