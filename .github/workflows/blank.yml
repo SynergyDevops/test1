@@ -20,6 +20,12 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.SYNERGY_DEVOPS_ACCESS_GITHUB_TOKEN }}
 
     steps:
+    - name: warpper
+      uses: hashicorp/setup-terraform@v2
+      with:
+        terraform_wrapper: true
+    
+    
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
