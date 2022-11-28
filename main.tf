@@ -8,7 +8,7 @@ terraform {
 }
 provider "github" {
   #token        = "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"
-  organization = "SynergyDevops"
+  organization  = "SynergyDevops"
   #version = "~> 4.0"
 }
 
