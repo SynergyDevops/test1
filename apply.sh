@@ -2,5 +2,5 @@
 
 set -e
 
-terraform apply
+terraform plan
 terraform output -json > ./out.json
