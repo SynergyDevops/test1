@@ -37,11 +37,11 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
       
-    - name: Terraform json output
-      run: terraform show
-      
     - name: terraform apply
       run: terraform apply -auto-approve -input=false
+      
+    - name: Terraform json output
+      run: terraform show -json
     
 #   - name: warpper
 #     uses: hashicorp/setup-terraform@v2
