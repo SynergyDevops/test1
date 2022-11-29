@@ -38,7 +38,7 @@ jobs:
       run: terraform plan
       
     - name: Terraform json output
-      run: terraform show -json
+      run: terraform show
       
     #- name: terraform apply
     #  run: terraform apply -auto-approve -input=false
