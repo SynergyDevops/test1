@@ -9,7 +9,7 @@ terraform {
 provider "github" {
   #token        = "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"
   organization  = "SynergyDevops"
-  #version = "~> 4.0"
+  #version      = "~> 4.0"
 }
 
 resource "github_branch_protection_v3" "main_protection" {
