@@ -38,7 +38,7 @@ jobs:
       run: terraform plan
       
     - name: Terraform json output
-      run: terraform plan -json
+      run: terraform output -json > ./tf.out.json.json
       
     #- name: terraform apply
     #  run: terraform apply -auto-approve -input=false
