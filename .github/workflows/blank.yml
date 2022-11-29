@@ -41,7 +41,7 @@ jobs:
       run: terraform apply -auto-approve -input=false
       
     - name: Terraform json output
-      run: terraform show -json
+      run: terraform output -json
     
 #   - name: warpper
 #     uses: hashicorp/setup-terraform@v2
