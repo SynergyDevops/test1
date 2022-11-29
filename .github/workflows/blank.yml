@@ -49,7 +49,7 @@ jobs:
 #         terraform_wrapper: true
       
 #   - name: terraform export
-#     run: terraform output -json main.tf
+#     run: terraform plan -json
         
     - uses: ahmadnassri/action-terraform-report@v3
       with:
