@@ -44,7 +44,7 @@ jobs:
       run: terraform output
       
     - name: Terraform json output
-      run: terraform output -json > out.json
+      run: terraform output -json
     
 #   - name: warpper
 #     uses: hashicorp/setup-terraform@v2
