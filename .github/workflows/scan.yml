@@ -1,4 +1,4 @@
-name: Test for terraform-docs bug report
+name: Test for terraform-docs bug report.
 
 on:
   push:
