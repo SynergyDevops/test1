@@ -27,7 +27,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_repository"></a> [repository](#input\_repository) | Synergy Repositories | `list(string)` | <pre>[<br>  "test2",<br>  "test3"<br>]</pre> | no |
+| <a name="input_repository"></a> [repository](#input\_repository) | Synergy Repositories | `list(string)` | <pre>[<br>  "test2",<br>  "test3",<br>  "Settings",<br>  "MultipleRepo"<br>]</pre> | no |
 
 ## Outputs
 
