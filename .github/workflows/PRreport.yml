@@ -1,4 +1,4 @@
-name: terraform-plan..
+name: TERRAFORM PLAN
 
 on:
   push:
