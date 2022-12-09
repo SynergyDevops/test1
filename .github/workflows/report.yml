@@ -1,26 +1,114 @@
-name: TERRAFORM PLAN
+# This workflow runs lint, build and test of the mono repo
+
+name: Quality Gate
 
 on:
   pull_request:
     branches: [main]
-    
+
   workflow_dispatch:
-  
+
 jobs:
-  terraform-plan:
+  lint:
+    name: Lint 📝
     runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎️
         uses: actions/checkout@v3.1.0
         with:
           fetch-depth: 0
-      - uses: hashicorp/setup-terraform@v1
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v2.2.4
         with:
-          terraform_wrapper: false
+          version: 7.11.0
+      - name: Install 📦
+        run: |
+          pnpm install
+      - name: Nx Affected 🐋
+        uses: nrwl/nx-set-shas@v3.0.2
+      - name: Lint 📝
+        run: |
+          pnpm exec nx affected:lint --configuration=ci --parallel=3
+          pnpm lint-non-code-files
+
+  build_apps:
+    name: Build apps 🏗️
+    runs-on: ubuntu-latest
+    steps:
       - name: Checkout 🛎️
-        uses: ahmadnassri/action-terraform-report@v3
+        uses: actions/checkout@v3.1.0
         with:
-          # tell the action the plan outputs
-          terraform-text: ${{ github.workspace }}/terraform.text
-          terraform-json: ${{ github.workspace }}/terraform.json
-          remove-stale-reports: true
+          fetch-depth: 0
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.11.0
+      - name: Install 📦
+        run: |
+          pnpm install
+      - name: Build 🏗️
+        run: |
+          pnpm exec nx run-many \
+            --target=build \
+            --projects=$(pnpm exec nx affected:apps --all --plain | sed -r 's/[ ]+/,/g') \
+            --parallel=3
+
+  build_libs:
+    name: Build libs 🏗️
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.11.0
+      - name: Install 📦
+        run: |
+          pnpm install
+      - name: Build 🏗️
+        run: |
+          pnpm exec nx run-many \
+            --target=build \
+            --projects=$(pnpm exec nx affected:libs --all --plain | sed -r 's/[ ]+/,/g') \
+            --parallel=3
+
+  test:
+    name: Test ✅
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.11.0
+      - name: Install 📦
+        run: |
+          pnpm install
+      - name: Test ✅
+        run: |
+          pnpm exec nx run-many --target=test --parallel=3
+
+  storybook:
+    name: Storybook 📖
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.1.0
+        with:
+          fetch-depth: 0
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v2.2.4
+        with:
+          version: 7.11.0
+      - name: Install 📦
+        run: |
+          pnpm install
+      - name: Storybook Build 📖
+        run: |
+          pnpm exec nx run storybook:storybook:build
