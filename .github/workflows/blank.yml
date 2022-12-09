@@ -1,41 +1,35 @@
-name: terraform
+name: TERRAFORM PLAN
 
 on:
   push:
     branches:
     - main
   pull_request:
-    branches: [ main ]
-  #To trigger manual
-  workflow_dispatch: 
+    branches: [main]
 
 jobs:
-  terraform:
-    #runs-on: [self-hosted, x64, linux, research]
+  terraform-plan:
     runs-on: ubuntu-latest
-    container:
-      image: hashicorp/terraform
-    #  image: .github/workflows/Dockerfile
-    env:
-      GITHUB_TOKEN: ${{ secrets.SYNERGY_DEVOPS_ACCESS_GITHUB_TOKEN }}
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
-    - name: Checkout
-      uses: actions/checkout@v3
+      - name: Checkout 🛎️
+        uses: actions/checkout@v3.1.0
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_wrapper: false
 
-    # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
-    - name: Terraform Init
-      run: terraform init
+      - run: terraform init
+      - run: terraform plan -lock=false -out terraform.plan
 
-    # Checks that all Terraform configuration files adhere to a canonical format
-    #- name: Terraform Format
-    #  run: terraform fmt -check
+      # generate plain output
+      - run: terraform show -no-color terraform.plan > terraform.text
 
-    # Generates an execution plan for Terraform
-    - name: Terraform Plan
-      run: terraform plan
-      
-    - name: terraform apply
-      run: terraform apply -auto-approve -input=false 
-      
+      # generate json output
+      - run: terraform show -json terraform.plan > terraform.json
+
+      - uses: actions/checkout@v3.1.0
+        with:
+          # tell the action the plan outputs
+          terraform-text: ${{ github.workspace }}/terraform.text
+          terraform-json: ${{ github.workspace }}/terraform.json
+          remove-stale-reports: true
