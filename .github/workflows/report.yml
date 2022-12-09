@@ -3,7 +3,7 @@ name: TERRAFORM PLAN
 on:
   push:
     branches:
-    - release
+    - main
   pull_request:
     branches: [main]
 
