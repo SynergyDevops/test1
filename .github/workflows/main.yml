@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  terraform plan:
-    name: terraform-plan
+  terraform:
+    name: Terraform
     runs-on: ubuntu-latest
     container:
       image: hashicorp/terraform
