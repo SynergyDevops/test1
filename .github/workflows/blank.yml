@@ -59,21 +59,21 @@ jobs:
 #   - name: terraform export
 #     run: terraform plan -json
         
-    - uses: actions/checkout@v2
-      # this is the new step using the ms-teams-notification action
-    - name: Notify dedicated teams channel
-      if: steps.plan.outcome == 'success'
-      #run: terraform apply -auto-approve -input=false
-      #env: 
-        #github-token: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-      uses: jdcargile/ms-teams-notification@v1.3
-      with:
-          github-token: ${{ github.token }} # this will use the runner's token.
-          ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-          notification-summary: Build Stats 
-          notification-color: 17a2b8
-          timezone: America/Denver
-          run : terraform apply -json
+#     - uses: actions/checkout@v2
+#       # this is the new step using the ms-teams-notification action
+#     - name: Notify dedicated teams channel
+#       if: steps.plan.outcome == 'success'
+#       #run: terraform apply -auto-approve -input=false
+#       #env: 
+#         #github-token: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+#       uses: jdcargile/ms-teams-notification@v1.3
+#       with:
+#           github-token: ${{ github.token }} # this will use the runner's token.
+#           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+#           notification-summary: Build Stats 
+#           notification-color: 17a2b8
+#           timezone: America/Denver
+#           run : terraform apply -json
     - name: notify 
       #uses: actions/checkout@v2
       uses: opsless/ms-teams-github-actions@main
