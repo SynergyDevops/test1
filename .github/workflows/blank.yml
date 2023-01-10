@@ -74,11 +74,11 @@ jobs:
           notification-color: 17a2b8
           timezone: America/Denver
           run : terraform apply -json
-    - name: notify 
-      #uses: actions/checkout@v2
-      uses: opsless/ms-teams-github-actions@main
-      if: always() # to let this step always run even if previous step failed
-      with:
-          github-token: ${{ github.token }}
-          webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
+#     - name: notify 
+#       #uses: actions/checkout@v2
+#       uses: opsless/ms-teams-github-actions@main
+#       if: always() # to let this step always run even if previous step failed
+#       with:
+#           github-token: ${{ github.token }}
+#           webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
     
