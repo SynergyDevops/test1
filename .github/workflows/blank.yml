@@ -35,4 +35,8 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan
+    
+    # Generates an apply for Terraform
+    - name: Terraform Apply
+      run: terraform apply
       
