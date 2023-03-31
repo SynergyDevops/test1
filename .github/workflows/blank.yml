@@ -19,8 +19,7 @@ jobs:
     env:
       GITHUB_TOKEN: ${{ secrets.SYNERGY_DEVOPS_ACCESS_GITHUB_TOKEN }}
 
-    steps:    
-    
+    steps:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v3
@@ -37,48 +36,3 @@ jobs:
     - name: Terraform Plan
       run: terraform plan
       
-    - name: Terraform Plan Status
-      if: steps.plan.outcome == 'failure'
-      run: exit 1
-      #webhook: [webhook url]
-      
-    - name: terraform apply
-      run: terraform apply -auto-approve -input=false
-      
-    - name: Terraform Output
-      run: terraform output
-      
-    - name: Terraform json output
-      run: terraform output -json
-    
-#   - name: warpper
-#     uses: hashicorp/setup-terraform@v2
-#     with:
-#         terraform_wrapper: true
-      
-#   - name: terraform export
-#     run: terraform plan -json
-        
-#     - uses: actions/checkout@v2
-#       # this is the new step using the ms-teams-notification action
-#     - name: Notify dedicated teams channel
-#       if: steps.plan.outcome == 'success'
-#       #run: terraform apply -auto-approve -input=false
-#       #env: 
-#         #github-token: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-#       uses: jdcargile/ms-teams-notification@v1.3
-#       with:
-#           github-token: ${{ github.token }} # this will use the runner's token.
-#           ms-teams-webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-#           notification-summary: Build Stats 
-#           notification-color: 17a2b8
-#           timezone: America/Denver
-#           run : terraform apply -json
-    - name: notify 
-      #uses: actions/checkout@v2
-      uses: opsless/ms-teams-github-actions@main
-      if: always() # to let this step always run even if previous step failed
-      with:
-          github-token: ${{ github.token }}
-          webhook-uri: ${{ secrets.MS_TEAMS_WEBHOOK_URI }}
-    
