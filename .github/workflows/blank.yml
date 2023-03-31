@@ -38,5 +38,5 @@ jobs:
     
     # Generates an apply for Terraform
     - name: Terraform Apply
-      run: terraform apply
+      run: terraform apply -auto-approve -input=true
       
